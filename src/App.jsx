@@ -20,10 +20,17 @@ function Row ({label, defValue, tempData}) {
  ) 
 }
 
-function Form ({title, stateArray, setStateArray, temporaryEntry}) {
+function Form ({title, stateArray, setStateArray, temporaryEntry, editedExperience, setEditedExperience}) {
   function handleSubmit() {
     let stateArrayCopy = structuredClone(stateArray)
-    stateArrayCopy.push(temporaryEntry)
+    console.log(stateArray)
+    if (editedExperience.index== null)  {
+      stateArrayCopy.push(temporaryEntry)
+    }
+    else {
+      stateArrayCopy[editedExperience.index]=temporaryEntry
+    }
+    console.log(stateArray)
     setStateArray(stateArrayCopy)
   }
   let rows = Object.entries(temporaryEntry).map(([key, value]) =>  {
@@ -39,7 +46,7 @@ function Form ({title, stateArray, setStateArray, temporaryEntry}) {
     </div>
     )
 }
-function Section ({title, state, setState}) {
+function Section ({title, state, setState, editedExperience, setEditedExperience}) {
   let count=0
   return (
       <div className="section">
@@ -50,7 +57,7 @@ function Section ({title, state, setState}) {
               { 
                   state.map((State)=> {
                     count ++
-                    return <Experience type="edu" state={State} stateArray={state} id={count-1} setState={setState}/>
+                    return <Experience type="edu" state={State} stateArray={state} id={count-1} setState={setState} setEditedExperience={setEditedExperience}/>
                   })
               }
           </div>
@@ -73,19 +80,20 @@ function App() {
   const [personalEntries, setPersonalEntries] = useState([])
   const [educationalEntries, setEducationalEntries] = useState([])
   const [professionalEntries, setProfessionalEntries] = useState([])
+  const [editedExperience, setEditedExperience] = useState({index:null, type:null})
     return (
     <>
       <div className='forms'>
-        <Form title="Personal Details" stateArray={personalEntries} setStateArray={setPersonalEntries} temporaryEntry={structuredClone(returnInitData()[0])} />
-        <Form title="Education" stateArray={educationalEntries} setStateArray={setEducationalEntries} temporaryEntry={structuredClone(returnInitData()[1])} />
-        <Form title="Professional" stateArray={professionalEntries} setStateArray={setProfessionalEntries} temporaryEntry={structuredClone(returnInitData()[2])} />
+        <Form title="Personal Details" stateArray={personalEntries} setStateArray={setPersonalEntries} temporaryEntry={structuredClone(returnInitData()[0])} editedExperience={editedExperience} setEditedExperience={setEditedExperience} />
+        <Form title="Education" stateArray={educationalEntries} setStateArray={setEducationalEntries} temporaryEntry={structuredClone(returnInitData()[1])} editedExperience={editedExperience} setEditedExperience={setEditedExperience} />
+        <Form title="Professional" stateArray={professionalEntries} setStateArray={setProfessionalEntries} temporaryEntry={structuredClone(returnInitData()[2])} editedExperience={editedExperience} setEditedExperience={setEditedExperience} />
       </div>
       <div className='resume'>
         {((JSON.stringify(personalEntries) != JSON.stringify([])) && (JSON.stringify(educationalEntries != JSON.stringify([]))) && (JSON.stringify(professionalEntries) !=([])))?
         <>
           <Heading state={personalEntries}/>
-          <Section title="Education" state={educationalEntries} setState={setEducationalEntries}/>      
-          <Section title="Professional Experience" state={professionalEntries} setState={setProfessionalEntries}/>
+          <Section title="Education" state={educationalEntries} setState={setEducationalEntries} editedExperience={editedExperience} setEditedExperience={setEditedExperience}/>      
+          <Section title="Professional Experience" state={professionalEntries} setState={setProfessionalEntries} editedExperience={editedExperience} setEditedExperience={setEditedExperience}/>
         </>:null}      
       </div>
     </>

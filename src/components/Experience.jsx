@@ -1,7 +1,7 @@
 import DataCell from "./DataCell";
 import DateCell from "./DateCell";
 
-export default function Experience ({type, state, stateArray, id, setState}) {
+export default function Experience ({type, state, stateArray, id, setState, setEditedExperience}) {
 
     function removeElemfromArr (array, elem) {
         let arr = array.slice(0, array.indexOf(elem))
@@ -18,6 +18,10 @@ export default function Experience ({type, state, stateArray, id, setState}) {
         let updatedStateCopy = removeElemfromArr(stateArrayCopy, stateArrayCopy[elementID])
         console.log(updatedStateCopy)
         setState(updatedStateCopy)
+    }
+
+    function handleEdit(event) {
+        setEditedExperience({index: event.target.parentNode.parentNode.id, type: type})
     }
 
     return (
