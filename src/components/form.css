@@ -1,0 +1,28 @@
+.forms {
+    border: solid black;
+    height: 100%
+}
+
+.experience-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 3px;
+    width: 90%;
+}
+
+.dateCell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row {
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row:hover {
+background-color: rgb(184, 184, 184);
+}
