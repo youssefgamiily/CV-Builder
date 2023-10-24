@@ -24,11 +24,19 @@ function Form ({title, stateArray, setStateArray, temporaryEntry, editedExperien
   function handleSubmit() {
     let stateArrayCopy = structuredClone(stateArray)
     console.log(stateArray)
-    if (editedExperience.index== null)  {
+    console.log(temporaryEntry)
+    if (editedExperience){
+      if (editedExperience.index== null)  {
+        stateArrayCopy.push(temporaryEntry)
+      }
+      else {
+        stateArrayCopy[editedExperience.index]=temporaryEntry
+        if (editedExperience.index != null) setEditedExperience(null)
+      }
+    } else{
+      console.log("in else condition 2")
+        
       stateArrayCopy.push(temporaryEntry)
-    }
-    else {
-      stateArrayCopy[editedExperience.index]=temporaryEntry
     }
     console.log(stateArray)
     setStateArray(stateArrayCopy)
