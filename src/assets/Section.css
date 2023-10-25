@@ -1,0 +1,63 @@
+.section-heading {
+    background-color: #eef1f3;
+}
+
+
+.modify-buttons {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    width: 6%
+}
+.modify-buttons button {
+    margin-bottom: 5px;
+    padding: 10px
+}
+
+.experience-content{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap:5px;
+    height: fit-content;
+    padding: 3px;
+    width: 90%;
+}
+
+.dateCell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.section h3, .section h2, .section h4 {
+    margin: 0px;
+    
+}
+  
+.position {
+    font-weight: 400;
+}
+h4 {
+    font-weight: 400;
+}
+
+p {
+    margin: 0px
+}
+.dataCell {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+}
+.row {
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row:hover {
+background-color: rgb(184, 184, 184);
+}
